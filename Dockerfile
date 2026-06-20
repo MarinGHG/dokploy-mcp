@@ -12,7 +12,7 @@ COPY package.json pnpm-lock.yaml tsconfig.json ./
 COPY src ./src
 
 # Install dependencies and build
-RUN pnpm install --frozen-lockfile && pnpm run build
+RUN pnpm install --frozen-lockfile --config.onlyBuiltDependencies=esbuild && pnpm run build
 
 # ----- Production Stage -----
 FROM node:lts-alpine
