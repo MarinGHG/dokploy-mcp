@@ -6,13 +6,13 @@ WORKDIR /app
 RUN corepack enable && corepack prepare pnpm@latest --activate
 
 # Copy package and configuration
-COPY package.json pnpm-lock.yaml tsconfig.json ./
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml tsconfig.json ./
 
 # Copy source code
 COPY src ./src
 
 # Install dependencies and build
-RUN pnpm install --frozen-lockfile --config.onlyBuiltDependencies=esbuild && pnpm run build
+RUN pnpm install --frozen-lockfile && pnpm run build
 
 # ----- Production Stage -----
 FROM node:lts-alpine
